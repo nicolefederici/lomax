@@ -45,6 +45,7 @@ class CommandLineInterface
       valid = user_validation
       if valid != nil
         display_recordings(valid[:url])
+        # NEw Methods-- ##pick_song and ##scrape_all_music and ##display_all_music here is where I want to ask if user wants pick a song from this list to see if anyone in the world recorded it professionally at any point? (if I wanted to get cute, I'd add a youtube and vimeo scraper to see if anyone recorded it in their living room) I might need a Song class to process all songs as individual entities, and kind of batch put them through AllMusic by State or something, so the program can return all songs that have not yet been recorded anywhere but by the Lomaxes. 
       else 
         puts "Alan Lomax didn't record anything in that city, at least not according to the Library of Congress' Collections. Choose a city from the list this time."
       end
