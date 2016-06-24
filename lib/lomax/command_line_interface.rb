@@ -2,10 +2,10 @@
 require 'nokogiri'
 
 
-class CommandLineInterface
+class Lomax::CommandLineInterface
 
   def display_places
-    places = Scraper.get_places
+    places = Lomax::Scraper.get_places
     places.each do |place| 
       puts place[:name]
     end
@@ -13,7 +13,7 @@ class CommandLineInterface
 
   def display_recordings(url)
     list_of_recordings = []
-    recordings = Scraper.get_recordings(url)
+    recordings = Lomax::Scraper.get_recordings(url)
     recordings.each do |recording|
     puts recording.title, recording.date, recording.contributors
     end
@@ -24,7 +24,7 @@ class CommandLineInterface
   def user_validation
     display_places
     city_answer = gets.chomp #it is a string
-    places_array = Scraper.get_places 
+    places_array = Lomax::Scraper.get_places 
     choice = places_array.detect do |place|
       place[:name] == city_answer
     end

@@ -1,4 +1,4 @@
-class Recording
+class Lomax::Recording
 attr_accessor :title, :contributors, :date 
 
   def initialize(title,contributors,date)

@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'nokogiri'
 
-class Scraper
+class Lomax::Scraper
 
   def self.get_places
     doc = Nokogiri::HTML(open('https://www.loc.gov/collections/alan-lomax-in-michigan/index/location/'))
@@ -24,7 +24,7 @@ class Scraper
       title = item.css("div.description h2 a").text.strip
       contributors = item.css("ul li.contributor span").text.strip
       date = item.css("ul li.date span").text.strip
-      recordings_array << Recording.new(title,contributors,date)
+      recordings_array << Lomax::Recording.new(title,contributors,date)
     end
     return recordings_array
   end
