@@ -3,7 +3,8 @@ require_relative "./lomax/scraper.rb"
 require_relative "./lomax/recording.rb"
 require_relative "./lomax/command_line_interface.rb"
 require_relative "./lomax/song.rb"
-
+require 'nokogiri'
+require 'pry'
 module Lomax
   # Your code goes here...
 end

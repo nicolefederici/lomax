@@ -1,4 +1,4 @@
-class Lomax::Song
+class Lomax::Song < Recording
 
 #here is where I'd like to separate the songs in recordings containing multiple songs, and where I'd like have the user hear various songs.
 

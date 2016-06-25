@@ -8,4 +8,7 @@ attr_accessor :title, :contributors, :date
     
   end
 
+  def split_recording(title)
+    = self.title.split("; ")
+
 end
