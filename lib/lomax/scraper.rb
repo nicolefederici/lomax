@@ -70,6 +70,7 @@ class Lomax::Scraper
       #this is the trick for grabbing hfrefs out of the a tags- url is part of the actual tag, so when you select the a tag, you get an array and then you grab the first and only item of the array with [0], and then you ask for the value of the href attr., which is hash notation, in other words, even though div.title a[0] is an array with one thing in it- the url, we still have to use hash notation to access the actual url only, because nokogiri uses hash notation to model the attributes and values in html tags. ******** href is the key, and the url is the value of that key, so if we only want the url stuff, we need to give it the key so it spits out the value for us with no other bullshit.
       #because you have to grab infor from within the tag itself with the hrefs.
       professional_recordings_hash = self.year_album_label(url)
+      professional_recordings_hash[:title] = title_string
       professional_recordings_hash[:performers] = performers
       professional_recordings_hash[:composers] = composers
       professional_recordings_hash[:url] = url

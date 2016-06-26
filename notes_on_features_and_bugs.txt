@@ -1,0 +1,27 @@
+Problems with the gem:
+
+If something is titled “love song” or something generic, the only way to see if there are other recordings of the same song is to check how they both sound. Is there a code way to compare these recording examples?
+
+I’d like to be able to hear the tunes played, either in a list, or one by one as they are found. How would I do that?
+
+could not make this case insensitive without breaking it.
+
+“unknown title” is also a difficult song to check if there are any others like it. I don’t know how shazam works, but is there a shazam gem one could use in such cases?
+
+
+**I’d like to be able to see all the tunes in Michigan that have not otherwise been recorded except for the lomaxes, so I need a method for that.
+
+make the text prompts better.
+
+write a read me for it
+
+make better spacing before/after prompts
+
+**I’d like to return all the songs with ‘unknown title” from the whole collection, and se if I can find titles to them somehow. 
+
+it would be cool to see if i could find a public photo of the person who recorded the song- find out if there is an api of that kind of information. 
+
+seems like someone made a ruby gem for music handling at Dev Bootcamp:
+http://blog.devbootcamp.com/2015/programs-and-gems-for-making-music-with-ruby/
+
+

@@ -22,13 +22,14 @@ class Lomax::CommandLineInterface
     return recordings
   end
 
-  def find_song_name()
-    #validate song title?
-    recordings_for_allmusic_search = Lomax::Scraper.get_recordings(url)
-    recordings_for_allmusic_search.each do |recordings_for_allmusic_search|
-      return recording.title
+  # def find_song_name()
+  #   #validate song title?
+  #   recordings_for_allmusic_search = Lomax::Scraper.get_recordings(url)
+  #   recordings_for_allmusic_search.each do |recordings_for_allmusic_search|
+  #     return recording.title
 
   def valid_song_title?(title,joined_titles)
+    title = title
     flag = true 
     while flag == true
       if joined_titles.include?(title)
@@ -83,12 +84,16 @@ puts "wanna see if anyone else recorded any of those songs professionally? I can
     
    all_music_return = Lomax::Scraper.get_all_music_songs_of(title)
     #returns song hashes array with all the stuff anyone wants to know about other recordings.
-    all_music_return.each do |item|
-      puts "performers: #{item[:performers]}, composers: #{item[:composers]}, year recorded: #{item[:year]}, album: #{item[:album]}, label: #{item[:label]}"
+    if all_music_return.length == 0
+      puts "the Lomax field recording is the only known recording of this tune, at least according to All Music."
+    else
+      all_music_return.sort_by! {|hash| hash[:year]}
+      all_music_return.each do |item|
+      puts "\ntitle: '#{item[:title]}'\nperformers: #{item[:performers]}\ncomposers: #{item[:composers]}\nyear recorded: #{item[:year]}\nalbum: #{item[:album]}\nlabel: #{item[:label]}\n"
+      end
     end
 
-    
-
+  #maybe put an option to choose another song from that city
 
       else 
         puts "Alan Lomax didn't record anything in that city, at least not according to the Library of Congress' Collections. Choose a city from the list this time."
@@ -117,11 +122,4 @@ puts "wanna see if anyone else recorded any of those songs professionally? I can
       puts "Come back any time you'd like to check out this archive. See ya later!"
     end
   end
-
-
-
-
-
-
-
 end
