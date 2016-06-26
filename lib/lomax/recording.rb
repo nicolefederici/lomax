@@ -9,6 +9,10 @@ attr_accessor :title, :contributors, :date
   end
 
   def split_recording(title)
-    = self.title.split("; ")
+    title = Lomax::Recording.title
+    separated_title = self.title.split("; ")
+    return separated_title
+    #this is an array
+  end
 
 end

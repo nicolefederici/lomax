@@ -19,14 +19,27 @@ class Lomax::CommandLineInterface
     recordings.each do |recording|
     puts recording.title, recording.date, recording.contributors
     end
-
+    return recordings
   end
 
   def find_song_name()
+    #validate song title?
     recordings_for_allmusic_search = Lomax::Scraper.get_recordings(url)
     recordings_for_allmusic_search.each do |recordings_for_allmusic_search|
       return recording.title
 
+  def valid_song_title?(title,joined_titles)
+    flag = true 
+    while flag == true
+      if joined_titles.include?(title)
+        flag = false
+      else
+      puts "Please enter a valid song title."
+      title = gets.strip
+      end
+    end
+    return title
+  end
 
   def user_validation
     puts
@@ -52,22 +65,44 @@ class Lomax::CommandLineInterface
     while valid == nil
       valid = user_validation
       if valid != nil
-        display_recordings(valid[:url])
+      recordings = display_recordings(valid[:url])
+      titles_array = recordings.collect do|recording| 
+        recording.title
+      end
+      joined_titles = titles_array.join(",")
         # NEw Methods-- ##pick_song and ##scrape_all_music and ##display_all_music here is where I want to ask if user wants pick a song from this list to see if anyone in the world recorded it professionally at any point? (if I wanted to get cute, I'd add a youtube and vimeo scraper to see if anyone recorded it in their living room) I might need a Song class to process all songs as individual entities, and kind of batch put them through AllMusic by State or something, so the program can return all songs that have not yet been recorded anywhere but by the Lomaxes.
-         
+#optional text about your new options
+#OPTIONAL METHOD---- get all musc recordings
+    #getsing
+puts "wanna see if anyone else recorded any of those songs professionally? I can check All Music's archive of recordings for you and return all the artists who professionally recorded a version of that song, including the first time that artist recorded it, the album it appeared on and its label, plus the year it was recorded by that artist. Just type in the name of a song you want to investigate."
+  
+
+  title = gets.strip
+
+  title = valid_song_title?(title,joined_titles) 
+    
+   all_music_return = Lomax::Scraper.get_all_music_songs_of(title)
+    #returns song hashes array with all the stuff anyone wants to know about other recordings.
+    all_music_return.each do |item|
+      puts "performers: #{item[:performers]}, composers: #{item[:composers]}, year recorded: #{item[:year]}, album: #{item[:album]}, label: #{item[:label]}"
+    end
+
+    
+
+
       else 
         puts "Alan Lomax didn't record anything in that city, at least not according to the Library of Congress' Collections. Choose a city from the list this time."
       end
     end
 
         
-    next_meth
+    see_recordings_other_city?
 
   end
 
+ 
 
-
-  def next_meth 
+  def see_recordings_other_city? 
     
     puts "Would you like to see the recordings from another city in Michigan?"
     puts
@@ -82,4 +117,11 @@ class Lomax::CommandLineInterface
       puts "Come back any time you'd like to check out this archive. See ya later!"
     end
   end
+
+
+
+
+
+
+
 end
