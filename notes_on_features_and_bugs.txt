@@ -1,27 +1,55 @@
+Thee is no substitute for Alan Lomax-- scraped data requires human intervention..... we aren't being taken over by robots yet, at least robots controlled by me, anyhow. 
+
 Problems with the gem:
 
+ADVANCED:
 If something is titled “love song” or something generic, the only way to see if there are other recordings of the same song is to check how they both sound. Is there a code way to compare these recording examples?
-
-I’d like to be able to hear the tunes played, either in a list, or one by one as they are found. How would I do that?
-
-could not make this case insensitive without breaking it.
-
 “unknown title” is also a difficult song to check if there are any others like it. I don’t know how shazam works, but is there a shazam gem one could use in such cases?
 
+MP3 PLAYER?
+I’d like to be able to hear the tunes played, either in a list, or one by one as they are found. How would I do that?
 
+CASE
+could not make this case insensitive without breaking it.
+
+
+
+SEE ALL NoNCE RECORDINGS
 **I’d like to be able to see all the tunes in Michigan that have not otherwise been recorded except for the lomaxes, so I need a method for that.
 
+TEXT
 make the text prompts better.
 
 write a read me for it
 
 make better spacing before/after prompts
 
+SEE ALL UNKNOWN TITLE
 **I’d like to return all the songs with ‘unknown title” from the whole collection, and se if I can find titles to them somehow. 
 
+PHOTO?
 it would be cool to see if i could find a public photo of the person who recorded the song- find out if there is an api of that kind of information. 
 
 seems like someone made a ruby gem for music handling at Dev Bootcamp:
 http://blog.devbootcamp.com/2015/programs-and-gems-for-making-music-with-ruby/
 
+INTERESTING ERROR:
+TALK ABOUT IN BLOG.../Users/nicolefederici/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0/uri/rfc3986_parser.rb:20:in `split': URI must be ascii only "http://www.allmusic.com/search/songs/S\u{ed}r+a+kisl\u{e1}ny+a+Balaton+partj\u{e1}n" (URI::InvalidURIError)
+  from /Users/nicolefederici/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0/uri/rfc3986_parser.rb:72:in `parse'
+  from /Users/nicolefederici/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0/uri/common.rb:226:in `parse'
+  from /Users/nicolefederici/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0/open-uri.rb:33:in `open'
+  from /Users/nicolefederici/Development/code/lomax/lib/lomax/scraper.rb:36:in `get_li_s'
+  from /Users/nicolefederici/Development/code/lomax/lib/lomax/command_line_interface.rb:136:in `block (3 levels) in nonce_list'
+  from /Users/nicolefederici/Development/code/lomax/lib/lomax/command_line_interface.rb:135:in `each'
+  from /Users/nicolefederici/Development/code/lomax/lib/lomax/command_line_interface.rb:135:in `block (2 levels) in nonce_list'
+  from /Users/nicolefederici/Development/code/lomax/lib/lomax/command_line_interface.rb:133:in `each'
+  from /Users/nicolefederici/Development/code/lomax/lib/lomax/command_line_interface.rb:133:in `block in nonce_list'
+  from /Users/nicolefederici/Development/code/lomax/lib/lomax/command_line_interface.rb:130:in `each'
+  from /Users/nicolefederici/Development/code/lomax/lib/lomax/command_line_interface.rb:130:in `nonce_list'
+  from /Users/nicolefederici/Development/code/lomax/lib/lomax/command_line_interface.rb:61:in `run'
+  from bin/run_lomax:6:in `<main>'
 
+  so escaping it: there is a "built-in" called URI. URI's escape method converts non-basic ASCII characters to basic ASCII equivalents as required for URLS!!!! HOw to do this: 
+  1. require 'uri' at beginning of file
+  2. URI.escape(then put the url string with the outlaws in parentesis)
+  that's it! and it gets rid of the need for gsubs!

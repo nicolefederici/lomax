@@ -58,6 +58,7 @@ class Lomax::CommandLineInterface
   def run
     # The user sees the list of places the Lomaxes recorded in Michigan, and chooses a town to examine. Next, the recordings made in that twon are displayed with : title, date, performers.
     #NEW_METHOD- They are then asked if they want to choose a song from these to see if anyone else professionally recorded that song. THey will answer yes and get taken to the list of recordings (with artist, year, album, and label) for that song in All Music. If there is no other recording, they will be told that no other recording exists. Next, they will be asked if they want to 1. return to the list of songs to choose another. 2. 3.
+    nonce_list
     puts " Hey! You are at the Library of Congress' Alan Lomax Collection of Michigan Recordings! Here's a list of the Michigan cities from which Mr.Lomax collected recordings. Type the name of a city to view all the recordings he made there."
     puts 
     puts
@@ -119,7 +120,31 @@ puts "wanna see if anyone else recorded any of those songs professionally? I can
       run
     
     else
-      puts "Come back any time you'd like to check out this archive. See ya later!"
+     
+     puts "Come back any time you'd like to check out this archive. See ya later!"
     end
   end
+
+  def nonce_list
+    places = Lomax::Scraper.get_places
+    places.each do |place| 
+      url = place[:url]
+      recordings = Lomax::Scraper.get_recordings(url)
+      recordings.each do |recording|
+        title_array = recording.split_recording
+        title_array.each do |title_string|
+          nonce = Lomax::Scraper.get_li_s(title_string)
+          if nonce == true
+            puts place[:name] + "  '#{title_string}'"
+        
+          end
+        end
+      end
+    end
+  end
+
+
+
 end
+  
+

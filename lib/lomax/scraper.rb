@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
+require 'uri'
 
 class Lomax::Scraper
 
@@ -16,6 +17,34 @@ class Lomax::Scraper
     places_array.delete_if { |hash| hash[:name] == "United States" || hash[:name] == "Michigan" || hash[:name] == "Illinois" || hash[:name] == "Chicago" || hash[:name] == "Wisconsin"}
     return places_array
   end
+
+  def self.get_li_s(title_string) #this method returns true if it is a nonce song.
+    title = title_string.split(" ").join("+")
+    # title = title.gsub(/'/, "%27")
+    # title = title.gsub(/,/, "%2C")
+    # title = title.gsub(/!/, "%21")
+    # title = title.gsub(/"/, "%22")
+    # title = title.gsub(/&/, "%26")
+    # title = title.gsub(/-/, "%2D")
+    # title = title.gsub(/\)/, "%29")
+    # title = title.gsub(/\(/, "%28")
+    # title = title.gsub(/\//, "%2F")
+    # title = title.gsub(/\?/, "%3F")
+    # title = title.gsub(/:/, "%3A")
+    # title = title.gsub(/\[/, "%5B")
+    # title = title.gsub(/\]/, "%5D")
+
+  doc = Nokogiri::HTML(open(URI.escape("http://www.allmusic.com/search/songs/" + title)))
+  array = doc.css("li.song")
+  if array.length == 0
+    return true
+  else
+    return false
+  end
+end
+
+
+
 
   def self.get_recordings(url)
     doc = Nokogiri::HTML(open(url + "&c=150&st=list"))
@@ -44,21 +73,21 @@ class Lomax::Scraper
   def self.get_all_music_songs_of(title_string)
     
     title = title_string.split(" ").join("+")
-    title = title.gsub(/'/, "%27")
-    title = title.gsub(/,/, "%2C")
-    title = title.gsub(/!/, "%21")
-    title = title.gsub(/"/, "%22")
-    title = title.gsub(/&/, "%26")
-    title = title.gsub(/-/, "%2D")
-    title = title.gsub(/\)/, "%29")
-    title = title.gsub(/\(/, "%28")
-    title = title.gsub(/\//, "%2F")
-    title = title.gsub(/\?/, "%3F")
-    title = title.gsub(/:/, "%3A")
-    title = title.gsub(/\[/, "%5B")
-    title = title.gsub(/\]/, "%5D")
+    # title = title.gsub(/'/, "%27")
+    # title = title.gsub(/,/, "%2C")
+    # title = title.gsub(/!/, "%21")
+    # title = title.gsub(/"/, "%22")
+    # title = title.gsub(/&/, "%26")
+    # title = title.gsub(/-/, "%2D")
+    # title = title.gsub(/\)/, "%29")
+    # title = title.gsub(/\(/, "%28")
+    # title = title.gsub(/\//, "%2F")
+    # title = title.gsub(/\?/, "%3F")
+    # title = title.gsub(/:/, "%3A")
+    # title = title.gsub(/\[/, "%5B")
+    # title = title.gsub(/\]/, "%5D")
 
-  doc = Nokogiri::HTML(open("http://www.allmusic.com/search/songs/" + title))
+  doc = Nokogiri::HTML(open(URI.escape("http://www.allmusic.com/search/songs/" + title)))
   song_hashes_array = []
   #this is an array of hashes
   doc.css("li.song").each do |item|
