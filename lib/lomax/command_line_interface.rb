@@ -1,26 +1,22 @@
-
-require 'nokogiri'
-
-
 class Lomax::CommandLineInterface
 
   def display_places
     places = Lomax::Scraper.get_places
     places.each do |place| 
-      puts place[:name]
+      puts place.name
     end
     puts
     puts
   end
 
-  def display_recordings(url)
+  def display_recordings(place)
     puts
     puts
     list_of_recordings = []
-    recordings = Lomax::Scraper.get_recordings(url)
+    recordings = Lomax::Scraper.get_recordings(place)
     recordings.each do |recording|
       puts recording.title, recording.date
-      puts recording.contributors
+      puts recording.contributors, recording.place.name
       puts
       puts
     end
@@ -45,9 +41,9 @@ class Lomax::CommandLineInterface
     puts
     display_places
     city_answer = gets.chomp #it is a string
-    places_array = Lomax::Scraper.get_places 
+    places_array = Lomax::Place.all 
     choice = places_array.detect do |place|
-      place[:name] == city_answer
+      place.name == city_answer
     end
     return choice
   end
@@ -64,11 +60,11 @@ class Lomax::CommandLineInterface
     puts 
     puts
     
-    valid = nil
-    while valid == nil
-      valid = user_validation
-      if valid != nil
-        recordings = display_recordings(valid[:url])
+    flag = nil
+    while flag == nil #these two lines basically say, "if everything remians as it now is..."
+      flag = user_validation
+      if flag != nil
+        recordings = display_recordings(flag)
         titles_array = recordings.collect do|recording| 
           recording.title
         end
@@ -119,16 +115,15 @@ class Lomax::CommandLineInterface
 
 
   def nonce_list
-    places = Lomax::Scraper.get_places
+    places = Lomax::Place.all
     places.each do |place| 
-      url = place[:url]
-      recordings = Lomax::Scraper.get_recordings(url)
+      recordings = Lomax::Scraper.get_recordings(place)
       recordings.each do |recording|
         title_array = recording.split_recording
         title_array.each do |title_string|
           nonce = Lomax::Scraper.get_li_s(title_string)
           if nonce == true
-            puts place[:name] + "  '#{title_string}'"
+            puts place.name + "  '#{title_string}'"
         
           end
         end

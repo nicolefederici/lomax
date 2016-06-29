@@ -4,3 +4,5 @@ require_relative "../lib/lomax.rb"
 
 
 Lomax::CommandLineInterface.new.run
+
+#this is called the "executable file" it gets the whole thing running, which is why you type bin/run_lomax at the start og the gem in the command line.

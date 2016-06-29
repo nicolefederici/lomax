@@ -1,6 +1,6 @@
-require 'open-uri'
-require 'nokogiri'
-require 'uri'
+# require 'open-uri'
+# require 'nokogiri'
+# require 'uri'
 
 class Lomax::Scraper
 
@@ -8,13 +8,13 @@ class Lomax::Scraper
     doc = Nokogiri::HTML(open('https://www.loc.gov/collections/alan-lomax-in-michigan/index/location/'))
     places_array = []
     doc.css(".index li").each do |item|
-      city_hash = {}
-      city_hash[:name] = item.css("span.label").text
-      city_hash[:count] = item.css("span.count").text
-      city_hash[:url] = "https:" + item.css("a")[0]["href"]
-      places_array << city_hash
+      name = item.css("span.label").text
+      count = item.css("span.count").text
+      url = "https:" + item.css("a")[0]["href"]
+      if name != "United States" && name != "Michigan" && name != "Illinois" && name != "Chicago" && name != "Wisconsin"
+        places_array << Lomax::Place.new(name,count,url)
+      end
     end
-    places_array.delete_if { |hash| hash[:name] == "United States" || hash[:name] == "Michigan" || hash[:name] == "Illinois" || hash[:name] == "Chicago" || hash[:name] == "Wisconsin"}
     return places_array
   end
 
@@ -29,15 +29,17 @@ class Lomax::Scraper
     end
   end
 
-  def self.get_recordings(url)
-    doc = Nokogiri::HTML(open(url + "&c=150&st=list"))
+  def self.get_recordings(place)
+    doc = Nokogiri::HTML(open(place.url + "&c=150&st=list"))
     recordings_array = []
     doc.css(".search-results.list-view > li").each do |item|
       title = item.css("div.description h2 a").text.strip
       contributors = item.css("ul li.contributor span").text.strip
       date = item.css("ul li.date span").text.strip
-      recordings_array << Lomax::Recording.new(title,contributors,date)
-    end
+      recordings_array << Lomax::Recording.new(title,contributors,date,place)
+      end
+      place.recordings = recordings_array
+    
     return recordings_array
   end
    
@@ -98,10 +100,7 @@ class Lomax::Scraper
     return hash 
   end
 
-
-
- 
-  end
+end
 
 
 

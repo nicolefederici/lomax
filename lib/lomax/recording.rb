@@ -1,10 +1,12 @@
 class Lomax::Recording
-  attr_accessor :title, :contributors, :date 
+  attr_accessor :title, :contributors, :date, :place 
 
-  def initialize(title,contributors,date)
+  def initialize(title,contributors,date,place)
     @title = title
     @contributors = contributors
     @date = date
+    @place = place
+
   end
 
   def split_recording
@@ -12,5 +14,6 @@ class Lomax::Recording
     return separated_title
     #this is an array
   end
+
 
 end
