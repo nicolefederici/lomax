@@ -72,11 +72,11 @@ class Lomax::CommandLineInterface
           
         puts 
         puts
-        puts"Would you like to see if there are any other available recordings of this song on record?"
+        puts"Would you like to see if there are any other available recordings of one of these songs on record?"
         puts
-        puts "I can access All Music's archive to return all the other known recordings of that song, including the  artist(s) who recorded it, the album and label it first appeared on, and the year it was first recorded by that artist. And I'll do it in chronological order." 
+        puts "If so, I can access All Music's archive to return all the other known recordings of that song, including the  artist(s) who recorded it, the album and label it first appeared on, and the year it was first recorded by that artist. And I'll do it in chronological order." 
         puts
-        puts "Type the name of a song you want to investigate, or type no, if you want to return to the beginning."
+        puts "Type the name of a song you want to investigate, or type no, if you want to return to the beginning, with the original list of cities."
         puts
     
         title = gets.strip

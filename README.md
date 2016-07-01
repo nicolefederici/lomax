@@ -19,7 +19,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. The user types bin/run_lomax to get the gem running in the command line. This displays a welcome and list of Michigan cities.
+
+2. The user chooses from a list of cities, in order to return the Lomax field recordings made there.
+  These items are displayed with: title, location, date, artists, and archivists.
+
+3. The user chooses either:
+    a. a song to investigate further at AllMusic, in order to return all known recordings in the history of recorded music, in chronological order.
+    or 
+    b. to leave the current list of songs and go back to the original list of cities to start again.
+
+4. If the user chooses a., they will be taken to a new list of the AllMusic records for that song. Each item will list the     title, date, recording artist(s), composer(s), album title, and label in chronological order.
+
+5. After viewing this new list, the user will be asked to choose between:
+    a. seeing the Lomax recordings from another city in Michigan, which takes the user back to the original list.
+    or
+    b. leaving the program
+
+6. If the user chooses to leave, she is asked if she wants to see all the songs from the Lomax Michigan Archive for which there are no other known recordings in history. 
+
+7. If the user chooses yes, the gem returns a list of these songs and their identifying information from the catalogue.
+
+8. The program says goodbye.
+
+
 
 ## Development
 
