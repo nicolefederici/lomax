@@ -144,7 +144,7 @@ class Lomax::CommandLineInterface
       puts "Before you go, would you like to see a list of all the nonce songs (songs of which this field recording is the only likely recording ever made) in the Alan Lomax Collection of Michigan Recordings?"
 
       answer = gets.chomp
-      if answer.downcase == "yes"     
+      if answer == "yes"     
        nonce_list
       end
       puts
