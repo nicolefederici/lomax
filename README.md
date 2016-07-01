@@ -1,8 +1,5 @@
 # Lomax
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/lomax`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem uses the Alan Lomax Archive of Michigan Songs, a collection of field recordings of folk music sung by regular people, to display the songs they collected on their Michigan trip. Through this gem, the user can compare the songs in this archive to the complete AllMusic collection of the known recorded music throughout history, in order to discover which of the Lomax recordings were never otherwise recorded. 
 
 ## Installation
 
