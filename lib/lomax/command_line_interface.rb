@@ -24,7 +24,6 @@ class Lomax::CommandLineInterface
   end
 
   def valid_song_title?(title,joined_titles)
-    #title = title
     flag = true 
     while flag == true
       if joined_titles.downcase.include?(title.downcase)
