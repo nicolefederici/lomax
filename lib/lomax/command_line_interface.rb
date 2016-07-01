@@ -27,7 +27,7 @@ class Lomax::CommandLineInterface
     #title = title
     flag = true 
     while flag == true
-      if joined_titles.include?(title)
+      if joined_titles.downcase.include?(title.downcase)
         flag = false
       else
       puts "Please enter a valid song title."
@@ -43,7 +43,7 @@ class Lomax::CommandLineInterface
     city_answer = gets.chomp #it is a string
     places_array = Lomax::Place.all 
     choice = places_array.detect do |place|
-      place.name == city_answer
+      place.name.downcase == city_answer.downcase
     end
     return choice
   end
@@ -52,7 +52,7 @@ class Lomax::CommandLineInterface
 
   def run
     puts
-    puts "Hey! You're at the Library of Congress' Alan Lomax Collection of Michigan Recordings!" 
+    puts"Hey! You're at the Library of Congress' Alan Lomax Collection of Michigan Recordings!" 
     puts
     puts"Here's a list of the Michigan cities from which Mr.Lomax collected recordings." 
     puts
@@ -81,7 +81,7 @@ class Lomax::CommandLineInterface
     
         title = gets.strip
 
-        if title == "no" || title == "no"
+        if title.downcase == "no" 
           run
         else
 
@@ -139,13 +139,13 @@ class Lomax::CommandLineInterface
 
     answer = gets.chomp
 
-    if answer == "yes" || answer == "Yes"      
+    if answer.downcase == "yes"       
       run    
     else     
       puts "Before you go, would you like to see a list of all the nonce songs (songs of which this field recording is the only likely recording ever made) in the Alan Lomax Collection of Michigan Recordings?"
 
       answer = gets.chomp
-      if answer == "yes" || answer == "Yes"     
+      if answer.downcase == "yes"     
        nonce_list
       end
       puts
