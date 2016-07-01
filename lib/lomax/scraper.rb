@@ -1,7 +1,3 @@
-# require 'open-uri'
-# require 'nokogiri'
-# require 'uri'
-
 class Lomax::Scraper
 
   def self.get_places
