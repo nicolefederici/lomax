@@ -10,17 +10,15 @@ Gem::Specification.new do |spec|
   spec.email         = ["nicolefederici@yahoo.com"]
 
   spec.summary       = "Explores the Alan Lomax Collection of Michigan Songs and checks its collection for novel recordings against the records of AllMusic "
-  #spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.description   = "This gem uses a command line interface to access the Alan Lomax Archive of Michigan Songs, a collection of field recordings of folk music sung by regular people, to display the songs they collected on their Michigan trip. Through this gem, the user can compare the songs in this archive to the complete AllMusic collection of the known recorded music throughout history, in order to discover which of the Lomax recordings were never otherwise recorded." 
   spec.homepage      = "https://github.com/nicolefederici/lomax"
   spec.license       = "MIT"
 
-  # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
-  # delete this section to allow pushing this gem to any host.
-  # if spec.respond_to?(:metadata)
-  #   spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
-  # else
-  #   raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
-  # end
+  if spec.respond_to?(:metadata)
+  spec.metadata['allowed_push_host'] = "http://rubygems.org"
+  else
+    raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
+  end
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
