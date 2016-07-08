@@ -27,16 +27,13 @@ class Lomax::Scraper
 
   def self.get_recordings(place)
     doc = Nokogiri::HTML(open(place.url + "&c=150&st=list"))
-    recordings_array = []
     doc.css(".search-results.list-view > li").each do |item|
       title = item.css("div.description h2 a").text.strip
       contributors = item.css("ul li.contributor span").text.strip
       date = item.css("ul li.date span").text.strip
-      recordings_array << Lomax::Recording.new(title,contributors,date,place)
-      end
-      place.recordings = recordings_array
-    
-    return recordings_array
+      place.recordings << Lomax::Recording.new(title,contributors,date,place)
+    end
+    return place.recordings
   end
    
 
