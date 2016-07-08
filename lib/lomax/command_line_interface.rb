@@ -12,7 +12,6 @@ class Lomax::CommandLineInterface
   def display_recordings(place)
     puts
     puts
-    list_of_recordings = []
     recordings = Lomax::Scraper.get_recordings(place)
     recordings.each do |recording|
       puts recording.title, recording.date
@@ -36,7 +35,7 @@ class Lomax::CommandLineInterface
     return title
   end
 
-  def user_validation
+  def place_validation
     puts
     display_places
     city_answer = gets.chomp #it is a string
@@ -44,7 +43,7 @@ class Lomax::CommandLineInterface
     choice = places_array.detect do |place|
       place.name.downcase == city_answer.downcase
     end
-    return choice
+    return choice #is a place object
   end
 
 
@@ -61,9 +60,9 @@ class Lomax::CommandLineInterface
     
     flag = nil
     while flag == nil #these two lines basically say, "if everything remians as it now is..."
-      flag = user_validation
+      flag = place_validation
       if flag != nil
-        recordings = display_recordings(flag)
+        recordings = display_recordings(flag) #array of recording objects
         titles_array = recordings.collect do|recording| 
           recording.title
         end
