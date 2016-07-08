@@ -1,5 +1,5 @@
 # Lomax
-This gem uses the Alan Lomax Archive of Michigan Songs, a collection of field recordings of folk music sung by regular people, to display the songs they collected on their Michigan trip. Through this gem, the user can compare the songs in this archive to the complete AllMusic collection of the known recorded music throughout history, in order to discover which of the Lomax recordings were never otherwise recorded. 
+This gem uses a command line interface to access the Alan Lomax Archive of Michigan Songs, a collection of field recordings of folk music sung by regular people, to display the songs they collected on their Michigan trip. Through this gem, the user can compare the songs in this archive to the complete AllMusic collection of the known recorded music throughout history, in order to discover which of the Lomax recordings were never otherwise recorded. 
 
 ## Installation
 
