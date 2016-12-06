@@ -11,7 +11,7 @@ class Lomax::Scraper
         places_array << Lomax::Place.new(name,count,url)
       end
     end
-    return places_array
+    places_array
   end
 
   def self.get_li_s(title_string) #this method returns true if it is a nonce song.
@@ -19,9 +19,9 @@ class Lomax::Scraper
     doc = Nokogiri::HTML(open(URI.escape("http://www.allmusic.com/search/songs/" + title)))
     array = doc.css("li.song")
     if array.length == 0
-      return true
+      true
     else
-      return false
+      false
     end
   end
 
@@ -33,22 +33,36 @@ class Lomax::Scraper
       date = item.css("ul li.date span").text.strip
       place.recordings << Lomax::Recording.new(title,contributors,date,place)
     end
-    return place.recordings
+    place.recordings
   end
    
 
 
   def self.split_composers_performers(array)
-    new_array = []
-    array.each do |item|
-      new_array << item.text.strip
+
+    # my_new_array = a.collect {|x| x + "!" } 
+
+    # a.collect do |x|
+    #   x + "!" 
+    # end
+
+    # new_array = []
+
+    # array.collect do |item|
+    #   item.text.strip
+    #   #new_array << item.text.strip
+    # end.join(", ")
+
+    new_array = array.collect do |item|
+      item.text.strip
+      #new_array << item.text.strip
     end
-    hey = new_array.join(", ")
-    return hey
+    new_array.join(", ")
+    # return hey
   end
 
 
-  
+
 
   def self.get_all_music_songs_of(title_string)
       

@@ -1,3 +1,5 @@
+#remember to ask avidor about the extension of the executable file here and why people do that?
+
 class Lomax::CommandLineInterface
 
   def display_places
@@ -58,6 +60,7 @@ class Lomax::CommandLineInterface
     puts 
     puts
     
+    #valid_place------ should I change the name of this variable to valid_place to make this clearer?
     flag = nil
     while flag == nil #these two lines basically say, "if everything remians as it now is..."
       flag = place_validation
